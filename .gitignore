@@ -1,0 +1,77 @@
+# ==========================================
+# Sahin Metal - Git Ignore Configuration
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Local / OS Temporary Directories
+Library/
+.local/
+tmp/
+temp/
+
+# ------------------------------------------
+# Frontend (Node / Vite / Vue)
+# ------------------------------------------
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/.env.local
+frontend/.env.*.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# ------------------------------------------
+# Backend (.NET / C#)
+# ------------------------------------------
+**/[Bb]in/
+**/[Oo]bj/
+**/publish/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+.vs/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.log
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Application settings & secrets (Never commit live credentials)
+**/appsettings.json
+**/appsettings.*.json
+!**/appsettings.example.json
+
+# Raw media dump
+SahinMetalIMG/
+
+# Uploaded User Files (Uploads at runtime)
+backend/src/SahinMetal.Api/wwwroot/uploads/*
+!backend/src/SahinMetal.Api/wwwroot/uploads/.gitkeep

@@ -1,0 +1,761 @@
+/* Import Standard Bootstrap 5 CSS & Bootstrap Icons */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+/* OKLab Gradient Interpolation Support Token */
+:root {
+  --in-oklab: ;
+  --in-oklch: ;
+  color-scheme: light dark;
+}
+
+@supports (background: linear-gradient(in oklab, white, black)) {
+  :root {
+    --in-oklab: in oklab;
+    --in-oklch: in oklch;
+  }
+}
+
+/* Root CSS Variables for Soft & Modern Light Mode (Default) */
+:root,
+[data-bs-theme="light"] {
+  color-scheme: light;
+
+  /* Soft Neutral Surfaces */
+  --bg-primary: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f1f5f9;
+  --text-main: #0f172a;
+  --text-secondary-custom: #334155;
+  --text-muted-custom: #64748b;
+  --border-color-custom: rgba(226, 232, 240, 0.9);
+  --card-bg: #ffffff;
+
+  /* Primary Brand Palette (Soft Modern Cobalt & Slate) */
+  --accent-primary: #2563eb;
+  --accent-primary-hover: #1d4ed8;
+  --accent-primary-soft: rgba(37, 99, 235, 0.09);
+  --accent-primary-border: rgba(37, 99, 235, 0.18);
+  --accent-primary-text: #1e40af;
+
+  /* Secondary Warm Accent (Soft Amber-Bronze) */
+  --accent-amber: #2563eb;
+  --accent-amber-dark: #1d4ed8;
+  --accent-warm: #d97706;
+  --accent-warm-soft: rgba(217, 119, 6, 0.1);
+
+  /* Header & Hero Tokens */
+  --navbar-bg: rgba(255, 255, 255, 0.85);
+  --navbar-text: #1e293b;
+  --navbar-border: rgba(226, 232, 240, 0.85);
+
+  --hero-bg: linear-gradient(135deg var(--in-oklab), #f8fafc 0%, #eef2ff 50%, #f1f5f9 100%);
+  --hero-title-color: #0f172a;
+  --hero-desc-color: #475569;
+
+  --counter-bg: #ffffff;
+  --counter-card-bg: #f8fafc;
+  --counter-text: #0f172a;
+
+  /* Layered Soft Shadows */
+  --shadow-soft: 0 1px 3px rgba(15, 23, 42, 0.03), 0 8px 24px -4px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.05), 0 16px 32px -6px rgba(15, 23, 42, 0.07);
+  --shadow-hover: 0 12px 28px -6px rgba(37, 99, 235, 0.12), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+
+  /* Soft Radii */
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+
+  accent-color: var(--accent-primary);
+}
+
+/* Soft & Modern Dark Mode Variables */
+[data-bs-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-primary: #0b1120;
+  --bg-surface: #131c31;
+  --bg-surface-alt: #18233c;
+  --text-main: #f1f5f9;
+  --text-secondary-custom: #cbd5e1;
+  --text-muted-custom: #94a3b8;
+  --border-color-custom: rgba(148, 163, 184, 0.14);
+  --card-bg: #131c31;
+
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #60a5fa;
+  --accent-primary-soft: rgba(59, 130, 246, 0.15);
+  --accent-primary-border: rgba(59, 130, 246, 0.28);
+  --accent-primary-text: #93c5fd;
+
+  --accent-amber: #3b82f6;
+  --accent-amber-dark: #2563eb;
+  --accent-warm: #f59e0b;
+  --accent-warm-soft: rgba(245, 158, 11, 0.14);
+
+  --navbar-bg: rgba(11, 17, 32, 0.85);
+  --navbar-text: #f1f5f9;
+  --navbar-border: rgba(148, 163, 184, 0.12);
+
+  --hero-bg: linear-gradient(135deg var(--in-oklab), #0b1120 0%, #131c31 55%, #172544 100%);
+  --hero-title-color: #f8fafc;
+  --hero-desc-color: #cbd5e1;
+
+  --counter-bg: #0f172a;
+  --counter-card-bg: #131c31;
+  --counter-text: #f8fafc;
+
+  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.2), 0 12px 28px -6px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 6px 16px -2px rgba(0, 0, 0, 0.28), 0 20px 36px -8px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 14px 32px -6px rgba(59, 130, 246, 0.2), 0 8px 18px -4px rgba(0, 0, 0, 0.35);
+
+  accent-color: var(--accent-primary);
+}
+
+/* Global Body & Typography */
+body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-main) !important;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  text-align: start;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Headings: Balanced Wrapping & Modern Geometric Sans */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.display-3, .display-4, .display-5, .display-6 {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.025em;
+  line-height: 1.22;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+/* Body Copy: Pretty Wrapping & Readable Measure */
+p, blockquote, li {
+  text-wrap: pretty;
+}
+
+/* Softer Weight Mapping (Replaces harsh 900 black weights with refined 700/800) */
+.fw-black {
+  font-weight: 800 !important;
+}
+
+/* Fluid Responsive Typography via clamp() */
+.display-3 {
+  font-size: clamp(2.1rem, 1.5rem + 2.5vw, 3.35rem) !important;
+}
+
+.display-4 {
+  font-size: clamp(1.85rem, 1.35rem + 2vw, 2.75rem) !important;
+}
+
+.display-5 {
+  font-size: clamp(1.65rem, 1.25rem + 1.6vw, 2.35rem) !important;
+}
+
+.display-6 {
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem) !important;
+}
+
+.lead {
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.15rem) !important;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Frosted Glass Sticky Header */
+.header-navbar {
+  background-color: var(--navbar-bg) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--navbar-text) !important;
+  border-bottom: 1px solid var(--navbar-border) !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02), 0 4px 16px rgba(15, 23, 42, 0.03) !important;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-navbar .nav-link {
+  color: var(--text-secondary-custom) !important;
+  font-weight: 500;
+  font-size: 0.94rem;
+  padding: 0.4rem 0.85rem !important;
+  border-radius: 0.6rem;
+  transition: all 0.2s ease;
+}
+
+.header-navbar .nav-link:hover {
+  color: var(--accent-primary) !important;
+  background-color: var(--accent-primary-soft);
+}
+
+.header-navbar .nav-link.active {
+  color: var(--accent-primary) !important;
+  font-weight: 600;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .header-navbar .nav-link.active {
+    background-color: transparent !important;
+  }
+
+  .header-navbar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0.85rem;
+    right: 0.85rem;
+    height: 2.5px;
+    background-color: var(--accent-primary);
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .header-navbar .nav-link {
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem !important;
+    font-size: 1.02rem;
+  }
+
+  .header-navbar .nav-link.active {
+    background-color: var(--accent-primary-soft) !important;
+  }
+}
+
+/* Dynamic Hero Section Styling */
+.theme-hero-section {
+  background: var(--hero-bg) !important;
+  transition: background 0.3s ease;
+}
+
+.theme-hero-title {
+  color: var(--hero-title-color) !important;
+}
+
+.theme-hero-desc {
+  color: var(--hero-desc-color) !important;
+}
+
+/* Counter Bar Theme Styling */
+.theme-counter-section {
+  background-color: var(--counter-bg) !important;
+  border-bottom: 1px solid var(--border-color-custom) !important;
+  transition: background-color 0.3s ease;
+}
+
+.theme-counter-card {
+  background-color: var(--counter-card-bg) !important;
+  border: 1px solid var(--border-color-custom) !important;
+  color: var(--counter-text) !important;
+  box-shadow: var(--shadow-soft);
+}
+
+.theme-counter-text {
+  color: var(--text-muted-custom) !important;
+}
+
+/* Soft Modern Accent & Bootstrap Utility Harmonization */
+.btn {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-warning,
+.btn-primary-soft-solid {
+  background: linear-gradient(135deg var(--in-oklab), var(--accent-primary) 0%, var(--accent-primary-hover) 100%) !important;
+  border: 1px solid transparent !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+}
+
+.btn-warning:hover,
+.btn-primary-soft-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.34) !important;
+  color: #ffffff !important;
+  filter: brightness(1.05);
+}
+
+.btn-outline-warning {
+  color: var(--accent-primary) !important;
+  border: 1px solid var(--accent-primary-border) !important;
+  background-color: var(--accent-primary-soft) !important;
+  font-weight: 600 !important;
+}
+
+.btn-outline-warning:hover {
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.22);
+}
+
+.btn-success {
+  background: linear-gradient(135deg var(--in-oklab), #10b981 0%, #059669 100%) !important;
+  border: 1px solid transparent !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.24);
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.32) !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-success {
+  color: #059669 !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+  background-color: rgba(16, 185, 129, 0.08) !important;
+  font-weight: 600 !important;
+}
+
+[data-bs-theme="dark"] .btn-outline-success {
+  color: #34d399 !important;
+  border-color: rgba(52, 211, 153, 0.28) !important;
+  background-color: rgba(16, 185, 129, 0.12) !important;
+}
+
+.btn-outline-success:hover {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+}
+
+.text-warning {
+  color: var(--accent-primary) !important;
+}
+
+/* Soft Modern Pill Badges */
+.badge.bg-warning,
+.soft-badge {
+  background-color: var(--accent-primary-soft) !important;
+  color: var(--accent-primary-text) !important;
+  border: 1px solid var(--accent-primary-border) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em;
+  border-radius: 9999px !important;
+  padding: 0.45rem 1rem !important;
+  box-shadow: none !important;
+}
+
+/* Solid Brand Mark Badge (e.g. Logo Icon) */
+.brand-mark {
+  background: linear-gradient(135deg var(--in-oklab), var(--accent-primary) 0%, #1e40af 100%);
+  color: #ffffff !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Soft Tinted Icon Containers */
+.icon-soft {
+  background-color: var(--accent-primary-soft) !important;
+  color: var(--accent-primary) !important;
+  border: 1px solid var(--accent-primary-border);
+  transition: all 0.25s ease;
+}
+
+.hover-lift:hover .icon-soft,
+.sector-card:hover .icon-soft {
+  background-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+  transform: scale(1.05);
+}
+
+/* Dynamic Theme Surface & Section Utility Classes */
+.theme-bg-surface {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-main) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-bg-alt {
+  background-color: var(--bg-surface-alt) !important;
+  color: var(--text-main) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-card {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color-custom) !important;
+  color: var(--text-main) !important;
+  box-shadow: var(--shadow-soft) !important;
+  border-radius: var(--radius-lg) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-text {
+  color: var(--text-main) !important;
+}
+
+.theme-text-muted {
+  color: var(--text-muted-custom) !important;
+}
+
+/* Soft Modern CTA Banner */
+.soft-cta-banner {
+  background: linear-gradient(135deg var(--in-oklab), #1e293b 0%, #0f172a 100%) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-md);
+}
+
+.soft-quote-section {
+  background: linear-gradient(135deg var(--in-oklab), #eff6ff 0%, #e0e7ff 100%) !important;
+  color: #0f172a !important;
+  border-top: 1px solid rgba(37, 99, 235, 0.12);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+[data-bs-theme="dark"] .soft-quote-section {
+  background: linear-gradient(135deg var(--in-oklab), #131c31 0%, #1e293b 100%) !important;
+  color: #f8fafc !important;
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Dark Mode Surface & Element Refinements */
+[data-bs-theme="dark"],
+body.dark-mode {
+  color-scheme: dark;
+}
+
+[data-bs-theme="dark"] .bg-white,
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .bg-body {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-main) !important;
+}
+
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .card-body,
+[data-bs-theme="dark"] .card-header,
+[data-bs-theme="dark"] .card-footer,
+[data-bs-theme="dark"] .theme-card,
+[data-bs-theme="dark"] .work-card,
+[data-bs-theme="dark"] .sector-card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color-custom) !important;
+  color: var(--text-main) !important;
+}
+
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] h6,
+[data-bs-theme="dark"] .h1,
+[data-bs-theme="dark"] .h2,
+[data-bs-theme="dark"] .h3,
+[data-bs-theme="dark"] .h4,
+[data-bs-theme="dark"] .h5,
+[data-bs-theme="dark"] .h6,
+[data-bs-theme="dark"] .card-title,
+[data-bs-theme="dark"] .text-dark {
+  color: #f8fafc !important;
+}
+
+[data-bs-theme="dark"] p,
+[data-bs-theme="dark"] .text-muted,
+[data-bs-theme="dark"] .text-secondary,
+[data-bs-theme="dark"] .card-text,
+[data-bs-theme="dark"] small,
+[data-bs-theme="dark"] .small {
+  color: var(--text-muted-custom) !important;
+}
+
+/* Consistent Soft Border Styling for All Dividers & Cards */
+.border,
+.border-top,
+.border-bottom,
+.border-start,
+.border-end,
+.border-light,
+.border-secondary {
+  border-color: var(--border-color-custom) !important;
+}
+
+[data-bs-theme="dark"] .border,
+[data-bs-theme="dark"] .border-top,
+[data-bs-theme="dark"] .border-bottom,
+[data-bs-theme="dark"] .border-start,
+[data-bs-theme="dark"] .border-end,
+[data-bs-theme="dark"] .border-light,
+[data-bs-theme="dark"] .border-secondary {
+  border-color: var(--border-color-custom) !important;
+}
+
+/* Soft Modern Form Controls */
+.form-control,
+.form-select {
+  background-color: var(--bg-primary) !important;
+  border: 1px solid var(--border-color-custom) !important;
+  color: var(--text-main) !important;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md) !important;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted-custom);
+  opacity: 0.7;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 4px var(--accent-primary-soft) !important;
+  outline: none;
+}
+
+[data-bs-theme="dark"] .modal-content {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color-custom) !important;
+}
+
+/* Light Mode Specific Overrides */
+[data-bs-theme="light"],
+body.light-mode {
+  color-scheme: light;
+}
+
+[data-bs-theme="light"] .bg-white {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+[data-bs-theme="light"] .bg-light {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-bs-theme="light"] .text-dark {
+  color: #0f172a !important;
+}
+
+[data-bs-theme="light"] .text-secondary {
+  color: #475569 !important;
+}
+
+/* Responsive Image Rule */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Glassmorphism & Card Effects */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--shadow-md);
+}
+
+[data-bs-theme="dark"] .glass-panel {
+  background: rgba(19, 28, 49, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+/* Subtle & Soft Animations */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes soft-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes soft-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+  }
+}
+
+@keyframes modal-soft-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float-gentle 5s ease-in-out infinite;
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse-glow 3s infinite ease-in-out;
+}
+
+.modal.fade.show .modal-dialog {
+  animation: modal-soft-enter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Button Click Soft Press Feedback */
+.btn:active {
+  transform: scale(0.97) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* Gentle Hover & Interactive Utility Effects */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover) !important;
+  border-color: var(--accent-primary-border) !important;
+}
+
+/* Mobile Friendly Touch Targets & Inputs */
+button, .btn, .nav-link, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* Horizontal Scrollbar hiding utility */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Soft Modern WhatsApp Floating Action Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg var(--in-oklab), #10b981 0%, #059669 100%);
+  color: white;
+  border-radius: 9999px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  z-index: 1000;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.32), 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px) scale(1.04);
+  color: white;
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.42), 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+/* Soft Modern Footer */
+.modern-footer {
+  background-color: #0f172a !important;
+  color: #cbd5e1 !important;
+  border-top: 1px solid rgba(148, 163, 184, 0.12) !important;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 991.98px) {
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    bottom: 18px;
+    right: 18px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Prevent iOS Safari automatic zoom on inputs */
+  input, select, textarea, .form-control, .form-select {
+    font-size: 16px !important;
+  }
+
+  /* Touch-friendly buttons for easier mobile tapping */
+  .btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-sm {
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .btn-lg {
+    padding: 0.75rem 1.35rem !important;
+    font-size: 0.95rem !important;
+    width: 100%;
+  }
+  .whatsapp-float {
+    width: 46px;
+    height: 46px;
+    font-size: 22px;
+    bottom: 14px;
+    right: 14px;
+  }
+}
